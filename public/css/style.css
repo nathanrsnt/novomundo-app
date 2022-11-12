@@ -1,0 +1,14 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navlogo {
+    width: 60px;
+}
+
+.rounded-circle{
+    border:1px solid;
+    border-radius:50%;
+    width:270px;
+    height:270px;
+    }
