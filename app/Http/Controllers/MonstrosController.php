@@ -17,4 +17,16 @@ class MonstrosController extends Controller
     {
         return view('monstros.create');
     }
+
+    public function store(Request $request)
+    {
+        $monstro = new Monstro();
+
+        $monstro->nome = $request->nome;
+        $monstro->nivel = $request->nivel;
+        $monstro->vida = $request->vida;
+        $monstro->save();
+
+        return view('/');
+    }
 }
