@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome', []);
 });
 
-Route::get('/monstros2', [MonstrosController::class, 'index']);
+Route::get('/monstros/read', [MonstrosController::class, 'index']);
 Route::get('/monstros/create', [MonstrosController::class, 'create']);
 Route::post('/monstros', [MonstrosController::class, 'store']);
 

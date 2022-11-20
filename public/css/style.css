@@ -22,3 +22,29 @@ body {
 .dropdown-menu a {
     color: #000000;
 }
+
+.nav-item .a {
+    color: #FFFFFF;
+}
+
+.nav-item .a:hover {
+    color: #585757;
+}
+
+#rcorners1 {
+    border-radius: 25px;
+    background: #ffffff;
+    padding: 10px;
+  }
+
+#rcorners2 {
+    border-radius: 25px;
+  }
+
+#nv {
+    margin-left: 0;
+}
+
+#vd {
+    margin-right: 0;
+}

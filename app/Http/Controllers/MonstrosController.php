@@ -10,7 +10,7 @@ class MonstrosController extends Controller
     public function index()
     {
         $monstros = Monstro::all();
-        return view('monstros', ['monstros' => $monstros]);
+        return view('monstros.read', ['monstros' => $monstros]);
     }
 
     public function create()
@@ -27,6 +27,6 @@ class MonstrosController extends Controller
         $monstro->vida = $request->vida;
         $monstro->save();
 
-        return view('/');
+        return redirect('/mostros/read')->with('msg', 'Monstro criado com sucesso!');
     }
 }
