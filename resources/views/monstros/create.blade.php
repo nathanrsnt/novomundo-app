@@ -5,11 +5,16 @@
 @section('content')
 
 <div class="container">
-    <form action="/monstros" method="POST">
+    <form action="/monstros" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="form-container col-md-7 text-center rcorners1">
+        <div class="form-container col-md-7 text-center text-light">
             <h1 class="text-center">Criar Monstro</h1>
-            <div class="form-group text-center">
+            <div class="form-group">
+                <label for="image">Imagem do Monstro: </label>
+                <br>
+                <input type="file" class="form-control-file" id="image" name="image" alt="image">
+            </div>
+            <div class="form-group mt-2">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Nome do Monstro">
             </div>

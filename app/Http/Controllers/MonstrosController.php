@@ -25,8 +25,22 @@ class MonstrosController extends Controller
         $monstro->nome = $request->nome;
         $monstro->nivel = $request->nivel;
         $monstro->vida = $request->vida;
+        
+        if ($request->hasfile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/monstros'), $imageName);
+
+            $monstro->image = $imageName;
+        }
+
         $monstro->save();
 
-        return redirect('/mostros/read')->with('msg', 'Monstro criado com sucesso!');
+        return redirect('/')->with('msg', 'Monstro criado com sucesso!');
     }
 }

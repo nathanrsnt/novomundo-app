@@ -10,7 +10,7 @@
         <div class="card col-md-3 mb-5 me-5 text-center" id ="rcorners1" >
             <div class="card-body">
                 <h4 class="card-title">{{$monstro->nome}}</h4>
-                <img src="/img/monstroteste.webp" id="rcorners2" alt="imgmonstro" width="270" height="150">
+                <img src="/img/monstros/{{ $monstro->image }}" id="rcorners2" alt="imgmonstro" width="270" height="150">
                 <p class="card-text d-inline" id="nv">Nível {{$monstro->nivel}}</p>
                 <p class="card-text d-inline" id="vd">Vida: {{$monstro->vida}}</p>
                 <br>

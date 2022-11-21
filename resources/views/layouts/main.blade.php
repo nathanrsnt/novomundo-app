@@ -7,7 +7,7 @@
         <!-- Icons -->
         <script src="https://kit.fontawesome.com/6aa92d4619.js" crossorigin="anonymous"></script>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Sono:wght@400;500&display=swap" rel="stylesheet">
         <!-- Styles Bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <!-- Styles da Pagina -->
@@ -18,6 +18,7 @@
     <body class="antialiased">
         <div class="container-fluid">
             <div class="row min-vh-100 flex-column flex-md-row">
+                @auth
                 <aside class="col-12 col md-3 col-xl-2 p-0 flex-shrink-1" style="background-color: #252422">
                     <nav class="navbar navbar-expand-md navbar-dark bd-dark flex-md-column flex-row align-item-center py-2 stricky-top" id="sidebar">
                         <div class="text-center p-3">
@@ -64,6 +65,7 @@
                         </div>
                     </nav>
                 </aside>
+                @endauth
                 <main class="col px-0 flex-grow-1">
                     <nav class="navbar navbar-expand-lg " style="background-color: #ffb200">
                         <div class="container-fluid">
@@ -80,9 +82,11 @@
                                             Monstros
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                @auth
                                                 <a class="dropdown-item" href="/monstros/create">Criar Monstro</a>
                                                 <a class="dropdown-item" href="#">Editar Monstro</a>
                                                 <a class="dropdown-item" href="#">Deletar Monstro</a>
+                                                @endauth
                                                 <a class="dropdown-item" href="/monstros/read">Ver Monstro</a>
                                             </div>
                                         </li>
@@ -92,9 +96,11 @@
                                             Itens
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                @auth
                                                 <a class="dropdown-item" href="#">Criar Item</a>
                                                 <a class="dropdown-item" href="#">Editar Item</a>
                                                 <a class="dropdown-item" href="#">Deletar Item</a>
+                                                @endauth
                                                 <a class="dropdown-item" href="#">Ver Item</a>
                                             </div>
                                         </li>
@@ -104,9 +110,11 @@
                                             Arsenal
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                @auth
                                                 <a class="dropdown-item" href="#">Criar Arsenal</a>
                                                 <a class="dropdown-item" href="#">Editar Arsenal</a>
                                                 <a class="dropdown-item" href="#">Deletar Arsenal</a>
+                                                @endauth
                                                 <a class="dropdown-item" href="#">Ver Arsenal</a>
                                             </div>
                                         </li>
@@ -116,7 +124,9 @@
                                             Raids
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                @auth
                                                 <a class="dropdown-item" href="#">Agendar Raid</a>
+                                                @endauth
                                                 <a class="dropdown-item" href="#">Agendamentos</a>
                                             </div>
                                         </li>
@@ -125,16 +135,19 @@
                                     <ul class="navbar-nav ms-auto">
                                         @guest
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Cadastre-se</a>
+                                            <a class="nav-link" href="/register">Cadastre-se</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Entrar</a>
+                                            <a class="nav-link" href="/login">Entrar</a>
                                         </li>
                                         @endguest
                                         @auth
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Sair</a>
-                                        </li>
+                                        <form action="{{ url('/logout') }}" method="POST">
+                                            @csrf
+                                            <li class="nav-item">
+                                                <a href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
+                                            </li>
+                                        </form>
                                         @endauth
                                     </ul>
                                 </div>

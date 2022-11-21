@@ -30,3 +30,12 @@ Route::get('/arsenal/create', [ArsenalController::class, 'create']);
 
 Route::get('/itens', [ItensController::class, 'index']);
 Route::get('/itens/create', [ItensController::class, 'create']);
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('welcome');
+    })->name('dashboard');
+});
