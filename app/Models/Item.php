@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Monstro extends Model
+class Item extends Model
 {
     use HasFactory;
 
-    public function user() {
+    protected $table = 'itens';
+
+    public function arsenal() {
         return $this->belongsTo('App\Models\User');
     }
 }
-

@@ -3,17 +3,74 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\User;
 
 class ItensController extends Controller
 {
 
     public function index()
     {
-        return view('itens');
+        $itens = Item::all();
+        return view('itens.all', ['itens' => $itens]);
     }
 
     public function create()
     {
         return view('itens.create');
     }
+
+    public function store(Request $request)
+    {
+        $item = new Item();
+
+        $item->nome = $request->nome;
+        $item->tipo = $request->tipo;
+        $item->estado = $request->estado;
+
+        $user = auth()->user();
+        $item->user_id = $user->id;
+
+        $item->save();
+
+        return redirect('/')->with('msg', 'Item criado com sucesso!');
+    }
+
+    public function show($id){
+
+        $item = Item::findOrfail($id);
+
+        $itemOwner = User::where('id', $item->user_id)->first()->toArray();
+
+        return view('itens.show', ['item' => $item, 'itemOwner' => $itemOwner]);
+    }
+
+    public function dashboard(){
+        $user = auth()->user();
+
+        $itens = $user->itens;
+
+        return view('itens.dashboard', ['itens' => $itens]);
+
+    }
+
+    public function destroy($id){
+        Item::findOrfail($id)->delete();
+        return redirect('/')->with('msg', 'Item deletado com sucesso!');
+    }
+
+    public function update(Request $request, $id){
+        $item = Item::findOrfail($id);
+
+        $item->nome = $request->nome;
+        $item->tipo = $request->tipo;
+        $item->estado = $request->estado;
+
+        $item->save();
+
+        return redirect('/')->with('msg', 'Item atualizado com sucesso!');
+    }
+
+
+    
 }

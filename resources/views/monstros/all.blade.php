@@ -14,7 +14,7 @@
                 <p class="card-text d-inline" id="nv">Nível {{$monstro->nivel}}</p>
                 <p class="card-text d-inline" id="vd">Vida: {{$monstro->vida}}</p>
                 <br>
-                <a href="#" class="btn btn-warning btn-lg col-md-12 mt-2">Ver mais</a>
+                <a href="/monstros/{{$monstro->id}}" class="btn btn-warning btn-lg col-md-12 mt-2">Ver mais</a>
             </div>
         </div>
     @endforeach
