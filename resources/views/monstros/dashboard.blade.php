@@ -3,7 +3,7 @@
 @section ('title', 'Dashboard')
 
 @section ('content')
-<div class="container">
+<div class="container text-light">
     <div class="row">
         <div class="col-12">
             <h1 class="text-center">Meus Monstros</h1>
@@ -16,12 +16,13 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <table class="table table-striped">
+            <table class="table table-striped text-light">
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Nível</th>
                         <th>Vida</th>
+                        <th>Eliminados</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,14 +31,23 @@
                         <td>{{$monstro->nome}}</td>
                         <td>{{$monstro->nivel}}</td>
                         <td>{{$monstro->vida}}</td>
+                        <td>{{$monstro->eliminados}}</td>
                         <td>
-                            <a href="/monstros/{{$monstro->id}}" class="btn btn-success">Ver</a>
-                            <a href="/monstros/{{$monstro->id}}/edit" class="btn btn-warning">Editar</a>
+                            <form action="/monstros/addElimina/{{$monstro->id}}" method="POST" style="display: inline-block">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </form>
                             <form action="/monstros/{{$monstro->id}}" method="POST" style="display: inline-block">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Deletar</button>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </form>
+                            <a href="/monstros/{{$monstro->id}}" class="btn btn-primary">Ver</a>
+                            <a href="/monstros/{{$monstro->id}}/edit" class="btn btn-primary">Editar</a> 
                         </td>
                     </tr>
                     @endforeach

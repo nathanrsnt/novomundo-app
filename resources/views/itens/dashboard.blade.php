@@ -17,7 +17,6 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h2>Itens</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>

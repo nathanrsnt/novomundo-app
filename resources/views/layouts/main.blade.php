@@ -94,10 +94,9 @@
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                                 <a class="dropdown-item" href="/arsenais/all">Ver Arsenais</a>
                                             </div>
-                                        </li>
-
-                                        
+                                        </li>  
                                     </ul>
+                                    
                                     <ul class="navbar-nav ms-auto">
                                         @guest
                                         <li class="nav-item">

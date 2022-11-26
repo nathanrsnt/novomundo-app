@@ -11,8 +11,17 @@ class ItensController extends Controller
 
     public function index()
     {
-        $itens = Item::all();
-        return view('itens.all', ['itens' => $itens]);
+        $search = request('search');
+
+        if ($search) {
+            $itens = Item::where([
+                ['nome', 'like', '%'.$search.'%']
+            ])->get();
+        } else{
+            $itens = Item::all();            
+        }
+
+        return view('itens.all', ['itens' => $itens, 'search' => $search]);
     }
 
     public function create()
@@ -30,6 +39,19 @@ class ItensController extends Controller
 
         $user = auth()->user();
         $item->user_id = $user->id;
+
+        if ($request->hasfile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/itens'), $imageName);
+
+            $item->image = $imageName;
+        }
 
         $item->save();
 

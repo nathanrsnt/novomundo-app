@@ -27,6 +27,7 @@ Route::get('/monstros/create', [MonstrosController::class, 'create'])->middlewar
 Route::get('/monstros/{id}', [MonstrosController::class, 'show']);
 Route::put('/monstros/update', [MonstrosController::class, 'update']);
 Route::delete('/monstros/{id}', [MonstrosController::class, 'destroy']);
+Route::post('/monstros/addElimina/{id}', [MonstrosController::class, 'addElimina']);
 Route::post('/monstros', [MonstrosController::class, 'store']);
 
 

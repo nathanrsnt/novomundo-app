@@ -10,8 +10,15 @@ class ArsenaisController extends Controller
 {
     public function index()
     {
-        $arsenais = Arsenal::all();
-        return view('arsenais.all', ['arsenais' => $arsenais]);
+        $search = request('search');
+        if ($search) {
+            $arsenais = Arsenal::where([
+                ['nome', 'like', '%'.$search.'%']
+            ])->get();
+        } else{
+            $arsenais = Arsenal::all();            
+        }
+        return view('arsenais.all', ['arsenais' => $arsenais, 'search' => $search]);
     }
 
     public function create()
@@ -42,6 +49,19 @@ class ArsenaisController extends Controller
 
         $user = auth()->user();
         $arsenal->user_id = $user->id;
+
+        if ($request->hasfile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/arsenais'), $imageName);
+
+            $arsenal->image = $imageName;
+        }
 
         $arsenal->save();
 

@@ -10,8 +10,16 @@ class MonstrosController extends Controller
 {
     public function index()
     {
-        $monstros = Monstro::all();
-        return view('monstros.all', ['monstros' => $monstros]);
+        $search = request('search');
+        if($search){
+            $monstros = Monstro::where([
+                ['nome', 'like', '%'.$search.'%']
+            ])->get();
+        } else{
+            $monstros = Monstro::all();
+        }
+        
+        return view('monstros.all', ['monstros' => $monstros, 'search' => $search]);
     }
 
     public function create()
@@ -21,7 +29,7 @@ class MonstrosController extends Controller
 
     public function destroy($id){
         Monstro::findOrfail($id)->delete();
-        return redirect('/')->with('msg', 'Monstro deletado com sucesso!');
+        return redirect('/monstros/dashboard')->with('msg', 'Monstro deletado com sucesso!');
     }
 
     public function store(Request $request)
@@ -50,7 +58,7 @@ class MonstrosController extends Controller
 
         $monstro->save();
 
-        return redirect('/')->with('msg', 'Monstro criado com sucesso!');
+        return redirect('/monstros/dashboard')->with('msg', 'Monstro criado com sucesso!');
     }
 
     public function show($id){
@@ -73,5 +81,12 @@ class MonstrosController extends Controller
         $monstros = $user->monstros;
 
         return view('monstros.dashboard', ['monstros' => $monstros]);
+    }
+
+    public function addElimina($id){	
+        $monstro = Monstro::findOrfail($id);
+        $monstro->increment('eliminados');
+
+        return redirect('/monstros/dashboard')->with('msg', 'Eliminação incrementada com sucesso!');
     }
 }

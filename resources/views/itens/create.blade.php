@@ -5,10 +5,15 @@
 @section('content')
 
 <div class="container">
-    <form action="/itens" method="POST">
+    <form action="/itens" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-container text-center text-light">
             <h1 class="text-center">Criar Item</h1>
+            <div class="form-group">
+                <label for="image">Imagem do Item: </label>
+                <br>
+                <input type="file" class="form-control-file" id="image" name="image" alt="image">
+            </div>
             <div class="form-group mt-2">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Nome do Monstro">
