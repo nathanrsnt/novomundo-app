@@ -9,7 +9,9 @@
     <div class="input-group mb-5">
         <form action="/itens/all" method="GET" class="d-flex">
             <input class="form-control me-2" id="search" name="search" type="text" placeholder="Pesquisar Item">
-            <button class="btn btn-primary" type="submit">Procurar</button>
+            <button class="btn btn-primary" type="submit">
+                <em class="fa-solid fa-search"></em>
+            </button>
         </form>
     </div>
     @if($search == 'search')
@@ -19,7 +21,7 @@
     @endif
     @foreach($itens as $item)
         <div class="card col-md-3 mb-5 me-5 text-center" id ="rcorners1" >
-            <div class="card-body">
+            <div class="card-body text-muted">
                 <h4 class="card-title">{{$item->nome}}</h4>
                 <img src="/img/itens/{{ $item->image }}" id="rcorners2" alt="imgitm" width="270" height="150">
                 <p class="card-text d-inline" id="nv">Tipo {{$item->tipo}}</p>

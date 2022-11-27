@@ -55,7 +55,7 @@ class ItensController extends Controller
 
         $item->save();
 
-        return redirect('/')->with('msg', 'Item criado com sucesso!');
+        return redirect('/itens/dashboard')->with('msg', 'Item criado com sucesso!');
     }
 
     public function show($id){
@@ -68,17 +68,31 @@ class ItensController extends Controller
     }
 
     public function dashboard(){
+        
         $user = auth()->user();
 
         $itens = $user->itens;
 
         return view('itens.dashboard', ['itens' => $itens]);
+    }
 
+    public function searchI(){
+        $search = request('search');
+
+        if ($search) {
+            $itens = Item::where([
+                ['nome', 'like', '%'.$search.'%']
+            ])->get();
+        } else{
+            $itens = Item::all();            
+        }
+
+        return view('itens.dashboard', ['itens' => $itens, 'search' => $search]);
     }
 
     public function destroy($id){
         Item::findOrfail($id)->delete();
-        return redirect('/')->with('msg', 'Item deletado com sucesso!');
+        return redirect('/itens/dashboard')->with('msg', 'Item deletado com sucesso!');
     }
 
     public function update(Request $request, $id){
@@ -92,7 +106,4 @@ class ItensController extends Controller
 
         return redirect('/')->with('msg', 'Item atualizado com sucesso!');
     }
-
-
-    
 }

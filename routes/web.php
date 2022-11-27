@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MonstrosController;
 use App\Http\Controllers\ItensController;
 use App\Http\Controllers\ArsenaisController;
+use App\Http\Controllers\PersonagemController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome', []);
@@ -23,6 +25,7 @@ Route::get('/', function () {
 
 Route::get('/monstros/all', [MonstrosController::class, 'index']);
 Route::get('/monstros/dashboard', [MonstrosController::class, 'dashboard'])->middleware('auth');
+Route::get('/monstros/dashboard', [MonstrosController::class, 'searchM'])->middleware('auth');
 Route::get('/monstros/create', [MonstrosController::class, 'create'])->middleware('auth');
 Route::get('/monstros/{id}', [MonstrosController::class, 'show']);
 Route::put('/monstros/update', [MonstrosController::class, 'update']);
@@ -32,7 +35,8 @@ Route::post('/monstros', [MonstrosController::class, 'store']);
 
 
 Route::get('/arsenais/all', [ArsenaisController::class, 'index']);
-Route::get('/arsenais/dashboard', [ArsenaisController::class, 'dashboard'])->middleware('auth');;
+Route::get('/arsenais/dashboard', [ArsenaisController::class, 'dashboard'])->middleware('auth');
+Route::get('/arsenais/dashboard', [ArsenaisController::class, 'searchA'])->middleware('auth');
 Route::get('/arsenais/create', [ArsenaisController::class, 'create'])->middleware('auth');
 Route::get('/arsenais/{id}', [ArsenaisController::class, 'show']);
 Route::put('/arsenais/update', [ArsenaisController::class, 'update']);
@@ -41,12 +45,15 @@ Route::post('/arsenais', [ArsenaisController::class, 'store']);
 
 
 Route::get('/itens/all', [ItensController::class, 'index']);
-Route::get('/itens/dashboard', [ItensController::class, 'dashboard'])->middleware('auth');;
+Route::get('/itens/dashboard', [ItensController::class, 'dashboard'])->middleware('auth');
+Route::get('/itens/dashboard', [ItensController::class, 'searchI'])->middleware('auth');
 Route::get('/itens/create', [ItensController::class, 'create'])->middleware('auth');
 Route::get('/itens/{id}', [ItensController::class, 'show']);
 Route::put('/itens/update', [ItensController::class, 'update']);
 Route::delete('/itens/{id}', [ItensController::class, 'destroy']);
 Route::post('/itens', [ItensController::class, 'store']);
+
+Route::get('/personagem/dashboard', [PersonagemController::class, 'index']);
 
 Route::middleware([
     'auth:sanctum',
@@ -61,3 +68,6 @@ Route::middleware([
 Route::get('/phpinfo', function() {
     phpinfo();
 });
+
+
+

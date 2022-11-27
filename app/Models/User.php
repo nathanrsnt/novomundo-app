@@ -70,4 +70,8 @@ class User extends Authenticatable
     public function itens() {
         return $this->hasMany('App\Models\Item');
     }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class);
+    }
 }

@@ -1,9 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        
+        User::factory()
+            ->count(10)
+            ->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $roles = ['dps', 'tank','healer'];
+
+        foreach ($roles as $role) {
+            Role::create(['name' => $role ]);
+        }
+
+        foreach(User::all() as $user) {
+            foreach (Role::all() as $role) {
+                $user->roles()->attach($role->id);
+            }
+        }
     }
 }

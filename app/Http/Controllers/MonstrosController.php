@@ -83,6 +83,19 @@ class MonstrosController extends Controller
         return view('monstros.dashboard', ['monstros' => $monstros]);
     }
 
+    public function searchM() {
+        $search = request('search');
+        if($search){
+            $monstros = Monstro::where([
+                ['nome', 'like', '%'.$search.'%']
+            ])->get();
+        } else{
+            $monstros = Monstro::all();
+        }
+        
+        return view('monstros.dashboard', ['monstros' => $monstros, 'search' => $search]);
+    }
+
     public function addElimina($id){	
         $monstro = Monstro::findOrfail($id);
         $monstro->increment('eliminados');

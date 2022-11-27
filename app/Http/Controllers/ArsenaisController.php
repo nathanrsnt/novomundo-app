@@ -33,7 +33,7 @@ class ArsenaisController extends Controller
 
     public function destroy($id){
         Arsenal::findOrfail($id)->delete();
-        return redirect('/')->with('msg', 'Arsenal deletado com sucesso!');
+        return redirect('/arsenais/dashboard')->with('msg', 'Arsenal deletado com sucesso!');
     }
 
     public function store(Request $request)
@@ -65,7 +65,7 @@ class ArsenaisController extends Controller
 
         $arsenal->save();
 
-        return redirect('/')->with('msg', 'Arsenal criado com sucesso!');
+        return redirect('/arsenais/dashboard')->with('msg', 'Arsenal criado com sucesso!');
     }
 
 
@@ -89,6 +89,18 @@ class ArsenaisController extends Controller
         $arsenais = $user->arsenais;
 
         return view('arsenais.dashboard', ['arsenais' => $arsenais]);
+    }
+
+    public function searchA(){
+        $search = request('search');
+        if ($search) {
+            $arsenais = Arsenal::where([
+                ['nome', 'like', '%'.$search.'%']
+            ])->get();
+        } else{
+            $arsenais = Arsenal::all();            
+        }
+        return view('arsenais.dashboard', ['arsenais' => $arsenais, 'search' => $search]);
     }
 
 

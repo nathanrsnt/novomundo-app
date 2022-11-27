@@ -16,7 +16,7 @@
             </div>
             <div class="form-group mt-2">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Nome do Monstro">
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o Nome do Item">
             </div>
             <div class="form-group">
                 <label for="tipo">Tipo</label>
