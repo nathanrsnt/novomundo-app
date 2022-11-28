@@ -8,6 +8,7 @@
     <div id="card-container" class="row">
     <div class="input-group mb-5">
         <form action="/arsenais/all" method="GET" class="d-flex">
+            @csrf
             <input class="form-control me-2" id="search" name="search" type="text" placeholder="Pesquisar Arsenal">
             <button class="btn btn-primary" type="submit">
                 <em class="fa-solid fa-search"></em>

@@ -12,6 +12,7 @@
     </div>
     <div class="input-group mb-5">
         <form action="/itens/dashboard" method="GET" class="d-flex">
+            @csrf
             <input class="form-control me-2" id="search" name="search" type="text" placeholder="Pesquisar Item &#x1F50E;&#xFE0E;">
         </form>
     </div>
